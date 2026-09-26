@@ -1,0 +1,216 @@
+/* --- Import Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- Variabel & Reset Global --- */
+:root {
+  --color-primary: #141414;
+  --color-secondary: #606060;
+  --color-bg-light: #f3f3f3;
+  --color-border: #CBCBCB;
+  --color-green: #38CB89;
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+}
+
+body {
+  background-color: #FFFFFF;
+  color: var(--color-primary);
+}
+
+/* --- Layout Halaman Sign Up (Split Screen) --- */
+.auth-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* Sisi Kiri: Gambar Kursi & Background Abu */
+.auth-image-side {
+  background-color: var(--color-bg-light);
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-logo {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  align-self: flex-start;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.auth-chair-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+
+.auth-chair-img {
+  max-width: 85%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Sisi Kanan: Form Pendaftaran */
+.auth-form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.auth-form-box {
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-title {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  letter-spacing: -1px;
+}
+
+.auth-subtitle {
+  font-size: 14px;
+  color: var(--color-secondary);
+  margin-bottom: 32px;
+}
+
+.auth-link {
+  color: var(--color-green);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Input & Form Elements --- */
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 15px;
+  color: var(--color-primary);
+  outline: none;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form-input::placeholder {
+  color: var(--color-secondary);
+}
+
+.form-input:focus {
+  border-bottom-color: var(--color-primary);
+}
+
+/* Tombol Mata (Password Toggle) */
+.password-group {
+  position: relative;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-secondary);
+  padding: 4px;
+}
+
+.eye-btn:hover {
+  color: var(--color-primary);
+}
+
+/* Checkbox Terms */
+.form-checkbox-group {
+  margin-bottom: 32px;
+  font-size: 13px;
+  color: var(--color-secondary);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.terms-text-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.terms-text-link:hover {
+  text-decoration: underline;
+}
+
+/* Tombol Utama (Sign Up) */
+.btn-black {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+  transition: opacity 0.2s;
+}
+
+.btn-black:hover {
+  opacity: 0.85;
+}
+
+/* --- Responsif untuk Layar Mobile (< 768px) --- */
+@media (max-width: 768px) {
+  .auth-container {
+    grid-template-columns: 1fr;
+  }
+  .auth-image-side {
+    display: none; /* Sembunyikan banner kursi di perangkat seluler */
+  }
+  .auth-form-side {
+    padding: 24px;
+  }
+  .auth-title {
+    font-size: 32px;
+  }
+}
