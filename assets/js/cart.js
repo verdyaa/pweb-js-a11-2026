@@ -199,7 +199,7 @@ function renderCartDrawer() {
       </div>
       <p class="cart-shipping-notice">Shipping and taxes calculated at checkout.</p>
       <div class="cart-drawer-actions">
-        <button type="button" class="btn btn-primary w-100" id="checkoutDrawerBtn" onclick="if(confirm('Proceed to checkout with order total $' + ${total.toFixed(2)} + '?')) { alert('Order placed successfully! Thank you for shopping with DEERA.'); clearCart(); closeCartDrawer(); }">Checkout ($${total.toFixed(2)})</button>
+        <a href="cart.html" class="btn btn-primary w-100" id="checkoutDrawerBtn">View cart ($${total.toFixed(2)})</a>
       </div>
     `;
   }

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — DEERA.</title>
+  <meta name="description" content="Complete your DEERA order: shipping details and payment method.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/checkout.css">
+
+  <script src="assets/js/cart.js" defer></script>
+  <script src="assets/js/auth.js" defer></script>
+  <script src="assets/js/checkout-page.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header standard-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="index.html" class="brand-logo" aria-label="DEERA. Homepage">DEERA.</a>
+
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#newArrivals" class="nav-link">Shop</a></li>
+          <li><a href="index.html#collections" class="nav-link">Collections</a></li>
+          <li><a href="index.html#newsletter" class="nav-link">Contact Us</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <div id="navAuthContainer">
+            <a href="login.html" class="nav-icon-link" title="Sign In" aria-label="Sign In">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </a>
+          </div>
+
+          <button type="button" class="nav-action-btn open-cart-btn" aria-label="Open Cart" title="View Cart">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="cart-badge" style="display: none;">0</span>
+          </button>
+
+          <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open mobile menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="cart-page-main">
+    <div class="container">
+      <h1 class="cart-page-title">Checkout</h1>
+
+      <nav class="cart-steps-nav" aria-label="Checkout progress">
+        <div class="step-item">
+          <span class="step-num">1</span>
+          <span>Shopping cart</span>
+        </div>
+        <div class="step-item active">
+          <span class="step-num">2</span>
+          <span>Checkout details</span>
+        </div>
+        <div class="step-item">
+          <span class="step-num">3</span>
+          <span>Order complete</span>
+        </div>
+      </nav>
+
+      <!-- Empty guard, shown by checkout-page.js when there is nothing to buy. -->
+      <div id="checkoutEmpty" class="state-block" hidden>
+        <div class="state-block__icon">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 11l3 3L22 4"></path>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+        </div>
+        <h2 class="state-block__title">Nothing to check out</h2>
+        <p class="state-block__desc">Your cart is empty, so there is no order to place yet.</p>
+        <a href="cart.html" class="btn btn-primary btn-lg">Back to cart</a>
+      </div>
+
+      <!-- Order complete screen, revealed after a successful order. -->
+      <div id="orderComplete" class="order-complete" hidden>
+        <div class="order-complete__check">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2 class="order-complete__title">Order confirmed</h2>
+        <span class="order-complete__id" id="completeOrderId">DRA-000</span>
+        <p class="order-complete__desc">Thank you for shopping with DEERA. A confirmation has been recorded for your order.</p>
+        <div class="order-complete__actions">
+          <a href="index.html#newArrivals" class="btn btn-primary btn-lg">Continue shopping</a>
+          <a href="index.html" class="btn btn-outline btn-lg">Back to home</a>
+        </div>
+      </div>
+
+      <div id="checkoutLayout" class="cart-layout" hidden>
+        <form id="checkoutForm" novalidate>
+          <fieldset class="checkout-fieldset">
+            <legend class="checkout-fieldset__legend">Contact &amp; shipping</legend>
+            <div class="field-grid">
+              <div class="field">
+                <label class="field__label" for="firstName">First name</label>
+                <input class="field__control" type="text" id="firstName" name="firstName" autocomplete="given-name">
+                <span class="field__error" id="err-firstName"></span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="lastName">Last name</label>
+                <input class="field__control" type="text" id="lastName" name="lastName" autocomplete="family-name">
+                <span class="field__error" id="err-lastName"></span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="email">Email</label>
+                <input class="field__control" type="email" id="email" name="email" autocomplete="email">
+                <span class="field__error" id="err-email"></span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="phone">Phone</label>
+                <input class="field__control" type="tel" id="phone" name="phone" inputmode="numeric" autocomplete="tel">
+                <span class="field__error" id="err-phone"></span>
+              </div>
+              <div class="field field--full">
+                <label class="field__label" for="address">Address</label>
+                <input class="field__control" type="text" id="address" name="address" autocomplete="street-address">
+                <span class="field__error" id="err-address"></span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="city">City</label>
+                <input class="field__control" type="text" id="city" name="city" autocomplete="address-level2">
+                <span class="field__error" id="err-city"></span>
+              </div>
+              <div class="field">
+                <label class="field__label" for="postal">Postal code</label>
+                <input class="field__control" type="text" id="postal" name="postal" inputmode="numeric" autocomplete="postal-code">
+                <span class="field__error" id="err-postal"></span>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="checkout-fieldset">
+            <legend class="checkout-fieldset__legend">Payment method</legend>
+            <div class="payment-methods">
+              <label class="payment-card">
+                <input type="radio" name="payment" value="card" checked>
+                <span class="payment-card__label">Credit / Debit Card</span>
+              </label>
+              <label class="payment-card">
+                <input type="radio" name="payment" value="cod">
+                <span class="payment-card__label">Cash on Delivery</span>
+              </label>
+              <label class="payment-card">
+                <input type="radio" name="payment" value="ewallet">
+                <span class="payment-card__label">E-Wallet</span>
+              </label>
+            </div>
+
+            <div id="payCard" class="payment-detail">
+              This is a test checkout, so no real card details are collected. Your order is confirmed on submit.
+            </div>
+            <div id="payCod" class="payment-detail">
+              Pay the courier in cash when your order arrives.
+            </div>
+            <div id="payEwallet" class="payment-detail">
+              Choose your wallet:
+              <div class="ewallet-sub">
+                <label><input type="radio" name="ewallet" value="gopay" checked> GoPay</label>
+                <label><input type="radio" name="ewallet" value="ovo"> OVO</label>
+                <label><input type="radio" name="ewallet" value="dana"> DANA</label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="checkout-fieldset">
+            <legend class="checkout-fieldset__legend">Order notes</legend>
+            <div class="field field--full">
+              <label class="field__label" for="notes">Notes (optional)</label>
+              <textarea class="field__control" id="notes" name="notes" rows="3" placeholder="Delivery instructions, gift note, etc."></textarea>
+            </div>
+          </fieldset>
+        </form>
+
+        <aside class="summary-panel checkout-summary" aria-label="Order summary">
+          <h2 class="summary-panel__title">Your order</h2>
+          <div id="orderItems"></div>
+
+          <div class="totals-row">
+            <span>Subtotal</span>
+            <span id="coSubtotal">$0.00</span>
+          </div>
+          <div class="totals-row">
+            <span>Shipping</span>
+            <span id="coShipping">$0.00</span>
+          </div>
+          <div class="totals-row totals-row--grand">
+            <span>Total</span>
+            <span id="coTotal">$0.00</span>
+          </div>
+
+          <button type="submit" form="checkoutForm" class="btn btn-primary btn-lg w-100">Place order</button>
+          <a href="cart.html" class="continue-link">&#8592; Back to cart</a>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-row">
+        <div class="footer-brand-wrap">
+          <span class="footer-brand-logo">DEERA.</span>
+          <span class="footer-store-tag">Headphone Store</span>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#newArrivals">Shop</a></li>
+          <li><a href="index.html#collections">Collections</a></li>
+          <li><a href="index.html#newsletter">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom-row">
+        <div class="footer-legal-links">
+          <span>Copyright &copy; 2026 DEERA. All rights reserved</span>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
+    <div class="cart-drawer-header">
+      <h3 class="cart-drawer-title">Cart</h3>
+      <button type="button" class="modal-close-btn" id="closeCartDrawerBtn" aria-label="Close Cart">&times;</button>
+    </div>
+    <div class="cart-drawer-body" id="cartDrawerBody"></div>
+    <div class="cart-drawer-footer" id="cartDrawerFooter"></div>
+  </aside>
+
+</body>
+</html>
