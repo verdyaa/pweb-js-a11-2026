@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEERA. — Premium Audio &amp; Headphone Store</title>
+  <meta name="description" content="Discover premium headphones, earbuds, and audio accessories at DEERA. Experience music like never before.">
+  
+  <!-- Google Fonts: Poppins & Inter (Native CSS Import) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Native Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- External JavaScript loaded with defer as mandated by praktikum requirements -->
+  <script src="assets/js/cart.js" defer></script>
+  <script src="assets/js/auth.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar" id="announcementBar" aria-label="Store Announcement">
+    <div class="announcement-content">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+        <line x1="7" y1="7" x2="7.01" y2="7"></line>
+      </svg>
+      <span>30% off storewide — Limited time!</span>
+      <a href="#newArrivals" class="announcement-link">
+        Shop Now
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+    <button type="button" class="announcement-close-btn" id="closeAnnouncementBtn" aria-label="Close Announcement">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </aside>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header hero-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <!-- Brand Logo -->
+        <a href="index.html" class="brand-logo" aria-label="DEERA. Homepage">
+          DEERA.
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="#newArrivals" class="nav-link">Shop</a></li>
+          <li><a href="#collections" class="nav-link">Collections</a></li>
+          <li><a href="#newsletter" class="nav-link">Contact Us</a></li>
+        </ul>
+
+        <!-- Navigation Actions (Search, Auth User Greeting/Menu, Cart, Mobile Toggle) -->
+        <div class="nav-actions">
+          <!-- Search trigger -->
+          <a href="#newArrivals" class="nav-action-btn" title="Search catalog" aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </a>
+
+          <!-- User Session Status (Dynamically populated by auth.js with localStorage check) -->
+          <div id="navAuthContainer">
+            <a href="login.html" class="nav-icon-link" title="Sign In" aria-label="Sign In">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Shopping Cart Trigger Button with badge -->
+          <button type="button" class="nav-action-btn open-cart-btn" aria-label="Open Cart" title="View Cart">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="cart-badge" style="display: none;">0</span>
+          </button>
+
+          <!-- Mobile Hamburger Toggle Button -->
+          <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open mobile menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left Hero Media: Smiling man with blue headphones and smartphone -->
+        <div class="hero-media">
+          <img 
+            src="assets/images/hero-person.png" 
+            alt="Person enjoying music with DEERA headphones" 
+            class="hero-person-img"
+            fetchpriority="high"
+          >
+        </div>
+
+        <!-- Right Hero Content -->
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Listen to the <span class="highlight-blue">amazing</span> music sound.
+          </h1>
+          <p class="hero-subtitle">
+            Experience music like never before with next-generation acoustic engineering.
+          </p>
+          <a href="#newArrivals" class="hero-btn">
+            Shopping Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner Brand Logos Section -->
+  <section class="brand-logos-section" aria-label="Partner Brands">
+    <div class="container">
+      <img src="assets/images/brand-logos.png" alt="Trusted Partner Brands" class="brand-logos-banner-img" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Section: New Arrivals & Dynamic Product Catalog -->
+  <section class="section-padding" id="newArrivals">
+    <div class="container">
+      <!-- Section Title & Header Link -->
+      <div class="section-header-row">
+        <h2 class="section-title">New Arrivals</h2>
+        <a href="#newArrivals" class="section-header-link">Browse Catalog &darr;</a>
+      </div>
+
+      <!-- Real-Time Search (Debounce Closure) & Functional Filtering/Sorting Toolbar -->
+      <div class="catalog-toolbar">
+        <!-- Debounced Real-time Search Box -->
+        <div class="search-box">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="text" 
+            id="productSearchInput" 
+            class="search-input" 
+            placeholder="Search products by title, category, or brand..."
+            aria-label="Search products"
+          >
+        </div>
+
+        <!-- Filter & Sort Dropdowns -->
+        <div class="filter-controls-group">
+          <!-- Category Filter Dropdown -->
+          <div class="select-filter-wrap">
+            <select id="categoryFilter" class="select-filter" aria-label="Filter products by category">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+
+          <!-- Sorting Dropdown -->
+          <div class="select-filter-wrap">
+            <select id="sortBy" class="select-filter" aria-label="Sort products">
+              <option value="default">Featured / Default</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating-desc">Highest Rated</option>
+              <option value="name-asc">Name: A to Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Catalog Count & Status -->
+      <div class="catalog-status-bar">
+        <span id="productsCountLabel">Loading catalog from API...</span>
+      </div>
+
+      <!-- Dynamic Product Cards Grid (Event Delegation Target for Detail Modal) -->
+      <div id="newArrivalsGrid" class="product-grid" aria-live="polite">
+        <!-- Dynamically rendered via app.js -->
+      </div>
+
+      <!-- Load More / Pagination Button (Array Slicing) -->
+      <div class="pagination-wrap">
+        <button type="button" id="loadMoreBtn" class="btn btn-outline btn-lg" style="display: none;">
+          Load More
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Shop Collection -->
+  <section class="collection-section" id="collections" aria-label="Shop Collections">
+    <div class="container">
+      <div class="section-header-row">
+        <h2 class="section-title">Shop Collection</h2>
+      </div>
+
+      <div class="collection-grid">
+        <!-- Large Left Banner: Headband -->
+        <a href="#newArrivals" class="collection-banner collection-banner-large" title="Browse Headbands">
+          <img src="assets/images/collection-headband.png" alt="Headband Collection" class="collection-banner-img" loading="lazy">
+        </a>
+
+        <!-- Right Column: Earbuds and Accessories -->
+        <div class="collection-right-col">
+          <!-- Earbuds Banner -->
+          <a href="#newArrivals" class="collection-banner collection-banner-small" title="Browse Earbuds">
+            <img src="assets/images/collection-earbuds.png" alt="Earbuds Collection" class="collection-banner-img" loading="lazy">
+          </a>
+
+          <!-- Accessories Banner -->
+          <a href="#newArrivals" class="collection-banner collection-banner-small" title="Browse Accessories">
+            <img src="assets/images/collection-accessories.png" alt="Accessories Collection" class="collection-banner-img" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Best Seller Grid -->
+  <section class="section-padding" style="padding-top: 20px;">
+    <div class="container">
+      <div class="section-header-row">
+        <h2 class="section-title">Best Seller</h2>
+        <a href="#newArrivals" class="section-header-link">View All &rarr;</a>
+      </div>
+
+      <!-- Best Seller Cards Grid (Event Delegation handled via container) -->
+      <div id="bestSellersGrid" class="product-grid">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Promotional Banner with Live Countdown Timer -->
+  <section class="promo-section" aria-label="Special Promotion">
+    <div class="container">
+      <div class="promo-container">
+        <!-- Left Banner Image -->
+        <div class="promo-img-col">
+          <img src="assets/images/promo-guy.png" alt="Man with sunglasses wearing DEERA headphones" loading="lazy">
+        </div>
+
+        <!-- Right Promotional Copy & Countdown Timer -->
+        <div class="promo-content-col">
+          <span class="promo-eyebrow">Promotion</span>
+          <h2 class="promo-title">Hurry up! 40% OFF</h2>
+          <p class="promo-desc">Thousands of high tech audio gear are waiting for you.</p>
+
+          <p class="countdown-label">Offer expires in:</p>
+          <div class="countdown-timer-grid">
+            <div class="timer-box">
+              <span class="timer-num" id="timerDays">02</span>
+              <span class="timer-unit">Days</span>
+            </div>
+            <div class="timer-box">
+              <span class="timer-num" id="timerHours">12</span>
+              <span class="timer-unit">Hours</span>
+            </div>
+            <div class="timer-box">
+              <span class="timer-num" id="timerMinutes">45</span>
+              <span class="timer-unit">Minutes</span>
+            </div>
+            <div class="timer-box">
+              <span class="timer-num" id="timerSeconds">05</span>
+              <span class="timer-unit">Seconds</span>
+            </div>
+          </div>
+
+          <div>
+            <a href="#newArrivals" class="btn btn-primary btn-lg">Shop now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Values & Service Features -->
+  <section class="values-section" aria-label="Customer Benefits">
+    <div class="container">
+      <div class="values-grid">
+        <!-- Value 1 -->
+        <div class="value-card">
+          <div class="value-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <h3 class="value-title">Free Shipping</h3>
+          <p class="value-desc">Order above $200</p>
+        </div>
+
+        <!-- Value 2 -->
+        <div class="value-card">
+          <div class="value-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+              <line x1="2" y1="10" x2="22" y2="10"></line>
+            </svg>
+          </div>
+          <h3 class="value-title">Money-back</h3>
+          <p class="value-desc">30 days guarantee</p>
+        </div>
+
+        <!-- Value 3 -->
+        <div class="value-card">
+          <div class="value-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <h3 class="value-title">Secure Payments</h3>
+          <p class="value-desc">Secured by Stripe</p>
+        </div>
+
+        <!-- Value 4 -->
+        <div class="value-card">
+          <div class="value-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </div>
+          <h3 class="value-title">24/7 Support</h3>
+          <p class="value-desc">Phone and Email support</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Instagram Newsfeed -->
+  <section class="instagram-section" aria-label="Social Feed">
+    <div class="container">
+      <span class="insta-eyebrow">Newsfeed</span>
+      <h2 class="insta-title">Instagram</h2>
+      <p class="insta-subtitle">Follow us on social media for more discount &amp; promotions</p>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="insta-handle">@deera_official</a>
+
+      <div class="instagram-grid">
+        <div class="insta-item">
+          <img src="assets/images/instagram-1.png" alt="Lifestyle audio photography" loading="lazy">
+        </div>
+        <div class="insta-item">
+          <img src="assets/images/instagram-2.png" alt="Listening to DEERA sound outdoors" loading="lazy">
+        </div>
+        <div class="insta-item">
+          <img src="assets/images/instagram-3.png" alt="Working with music" loading="lazy">
+        </div>
+        <div class="insta-item">
+          <img src="assets/images/instagram-4.png" alt="DEERA headphone close-up" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Join Our Newsletter -->
+  <section class="newsletter-section" id="newsletter">
+    <div class="container">
+      <div class="newsletter-box">
+        <!-- Left Product Art -->
+        <div class="nl-media-left">
+          <img src="assets/images/newsletter-headphone.png" alt="Headphone decorative element" loading="lazy">
+        </div>
+
+        <!-- Center Form & Typography -->
+        <div class="nl-center-content">
+          <h2 class="nl-title">Join Our Newsletter</h2>
+          <p class="nl-desc">Sign up for deals, new products and promotions</p>
+          
+          <form class="newsletter-form" id="newsletterForm">
+            <div class="nl-input-wrap">
+              <svg class="nl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <input 
+                type="email" 
+                id="newsletterEmail" 
+                class="nl-input" 
+                placeholder="Email address" 
+                required 
+                aria-label="Email address for newsletter"
+              >
+            </div>
+            <button type="submit" class="nl-submit-btn">Signup</button>
+          </form>
+        </div>
+
+        <!-- Right Product Art -->
+        <div class="nl-media-right">
+          <img src="assets/images/newsletter-girl.png" alt="Happy girl enjoying headphones" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <!-- Top Row: Brand & Navigation -->
+      <div class="footer-top-row">
+        <div class="footer-brand-wrap">
+          <span class="footer-brand-logo">DEERA.</span>
+          <span class="footer-store-tag">Headphone Store</span>
+        </div>
+
+        <ul class="footer-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#newArrivals">Shop</a></li>
+          <li><a href="#collections">Collections</a></li>
+          <li><a href="#newsletter">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <!-- Bottom Row: Copyright, Legal & Socials -->
+      <div class="footer-bottom-row">
+        <div class="footer-legal-links">
+          <span>Copyright &copy; 2026 DEERA. All rights reserved</span>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+
+        <div class="footer-socials">
+          <a href="https://instagram.com" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="https://facebook.com" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="https://youtube.com" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Native HTML5 Dialog: Product Detail Modal (Triggered via Event Delegation) -->
+  <dialog id="productDetailModal" class="product-modal" aria-labelledby="modalProductTitle">
+    <div class="modal-header-bar">
+      <button type="button" class="modal-close-btn" id="closeModalBtn" aria-label="Close Product Details">&times;</button>
+    </div>
+    <div class="modal-body" id="modalProductBody">
+      <!-- Populated dynamically via openProductModal() in app.js -->
+    </div>
+  </dialog>
+
+  <!-- Slide-Out Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
+    <div class="cart-drawer-header">
+      <h3 class="cart-drawer-title">Cart</h3>
+      <button type="button" class="modal-close-btn" id="closeCartDrawerBtn" aria-label="Close Cart">&times;</button>
+    </div>
+    <div class="cart-drawer-body" id="cartDrawerBody">
+      <!-- Rendered dynamically via cart.js -->
+    </div>
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <!-- Subtotal and actions rendered via cart.js -->
+    </div>
+  </aside>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div>
+      <div class="mobile-nav-header">
+        <span class="brand-logo">DEERA.</span>
+        <button type="button" class="modal-close-btn" id="mobileNavClose" aria-label="Close navigation">&times;</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#newArrivals">Shop</a></li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#newsletter">Contact Us</a></li>
+      </ul>
+    </div>
+    <div style="padding-top: 24px; border-top: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 10px;">
+      <a href="login.html" class="btn btn-primary w-100">Sign In</a>
+      <a href="signup.html" class="btn btn-outline w-100">Create Account</a>
+    </div>
+  </nav>
+
+</body>
+</html>

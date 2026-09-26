@@ -1,0 +1,440 @@
+/* ==========================================================================
+   DEERA. E-Commerce - Pages & Authentication Stylesheet
+   Styles for Login/Auth, Shop Catalog, Cart, Checkout, Account & Placeholders
+   ========================================================================== */
+
+/* 1. Login & Auth Page Layout */
+.auth-page-wrapper {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--color-white);
+}
+
+.auth-visual-col {
+  background-color: #f3f5f7;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  overflow: hidden;
+}
+
+.auth-brand-logo {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-primary);
+  z-index: 2;
+}
+
+.auth-visual-img-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-visual-img {
+  max-width: 90%;
+  max-height: 600px;
+  object-fit: contain;
+}
+
+.auth-form-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 64px;
+}
+
+.auth-form-container {
+  width: 100%;
+  max-width: 440px;
+}
+
+.auth-header {
+  margin-bottom: 32px;
+}
+
+.auth-title {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  font-size: 15px;
+  color: var(--color-secondary);
+}
+
+.auth-subtitle a {
+  color: var(--color-accent-green);
+  font-weight: 600;
+}
+
+.auth-subtitle a:hover {
+  text-decoration: underline;
+}
+
+/* Auth Alerts & Error Banner */
+.auth-alert {
+  padding: 12px 16px;
+  border-radius: var(--border-radius-md);
+  font-size: 13px;
+  margin-bottom: 20px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-alert.alert-danger {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+.auth-alert.alert-success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+/* Auth Form Fields */
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.form-input-wrap {
+  position: relative;
+  border-bottom: 1.5px solid var(--color-border);
+  transition: border-color var(--transition-fast);
+}
+
+.form-input-wrap:focus-within {
+  border-color: var(--color-primary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 15px;
+  color: var(--color-primary);
+  background: transparent;
+}
+
+.form-input::placeholder {
+  color: var(--color-muted);
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-secondary);
+}
+
+.form-checkbox-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  font-size: 13px;
+  color: var(--color-secondary);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  accent-color: var(--color-primary);
+  width: 16px;
+  height: 16px;
+}
+
+/* Demo Credentials Box */
+.demo-accounts-box {
+  margin-top: 32px;
+  padding: 16px;
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-md);
+  font-size: 13px;
+}
+
+.demo-title {
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.demo-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.demo-chip-btn {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 6px 12px;
+  border-radius: var(--border-radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.demo-chip-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+/* 2. Placeholder Pages Header Banner & Breadcrumbs */
+.page-hero-banner {
+  background-color: var(--color-bg-light);
+  padding: 48px 0;
+  text-align: center;
+}
+
+.page-hero-title {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-secondary);
+  list-style: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--color-primary);
+}
+
+.breadcrumbs .active {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* 3. Multi-Step Checkout / Cart Progress Bar */
+.cart-steps-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 0 20px;
+  flex-wrap: wrap;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-secondary);
+}
+
+.step-item.active {
+  color: var(--color-primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 8px;
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-border);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.step-item.active .step-num {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* 4. Placeholder Component Card (For Group Teammates) */
+.placeholder-section {
+  padding: 60px 0 100px;
+}
+
+.placeholder-card {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: 48px;
+  text-align: center;
+  background-color: #fafbfc;
+  margin-bottom: 36px;
+}
+
+.placeholder-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--color-bg-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--color-primary);
+}
+
+.placeholder-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.placeholder-desc {
+  font-size: 15px;
+  color: var(--color-secondary);
+  max-width: 520px;
+  margin: 0 auto 24px;
+}
+
+.placeholder-badges {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.spec-badge {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 6px 14px;
+  border-radius: var(--border-radius-full);
+  font-size: 12px;
+  color: var(--color-secondary);
+}
+
+/* 5. Base Account Layout */
+.account-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 48px;
+  padding: 60px 0;
+}
+
+.account-sidebar {
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-md);
+  padding: 24px;
+  height: fit-content;
+}
+
+.account-user-card {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 20px;
+}
+
+.account-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 28px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.account-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.account-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--border-radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-secondary);
+}
+
+.account-menu a:hover, .account-menu a.active {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 6. Responsive for Pages */
+@media (max-width: 900px) {
+  .auth-page-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .auth-visual-col {
+    display: none;
+  }
+  .auth-form-col {
+    padding: 48px 24px;
+  }
+  .account-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Helper styles for Auth Forms & Loading States */
+.spin-animation {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.accent-link {
+  color: #38cb89;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.accent-link:hover {
+  text-decoration: underline;
+}
