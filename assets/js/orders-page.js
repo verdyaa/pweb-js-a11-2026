@@ -1,7 +1,3 @@
-// orders-page.js: order history for orders.html.
-// Reads deera_orders (written by checkout) and renders each order newest-first.
-// Protected page: redirects to login when there is no session.
-
 (function () {
   const ORDERS_KEY = 'deera_orders';
 
@@ -20,7 +16,6 @@
     return '$' + Number(value).toFixed(2);
   }
 
-  // Render an ISO timestamp as a readable local date.
   function formatDate(iso) {
     const d = new Date(iso);
     if (isNaN(d)) return '';

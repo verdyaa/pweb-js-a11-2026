@@ -1,16 +1,3 @@
-/**
- * DEERA. E-Commerce - Main Homepage Controller
- * Implements:
- * - Dynamic product fetch from DummyJSON Products API
- * - Debounce search using Closure
- * - Category filter & sorting using Functional Programming
- * - Load More pagination using Array Slicing
- * - Product detail modal via Event Delegation on parent container
- * - Live promotional countdown timer
- * - Interactive carousel/tabs, mobile navigation, newsletter handling
- */
-
-// Application State
 const state = {
   allProducts: [],
   filteredProducts: [],
@@ -24,18 +11,8 @@ const state = {
   error: null
 };
 
-// ==========================================
-// 1. CLOSURE-BASED DEBOUNCE IMPLEMENTATION
-// ==========================================
-/**
- * Creates a debounced function that delays invoking fn until after delayMs have elapsed.
- * Utilizes JavaScript Closures to maintain the timer state across keystrokes.
- * @param {Function} fn The function to debounce
- * @param {number} delayMs Delay in milliseconds
- * @returns {Function}
- */
 function createDebounce(fn, delayMs = 350) {
-  let timerId = null; // Enclosed private variable via closure
+  let timerId = null;
 
   return function (...args) {
     const context = this;
@@ -49,12 +26,6 @@ function createDebounce(fn, delayMs = 350) {
   };
 }
 
-// ==========================================
-// 2. FETCH PRODUCTS FROM DUMMYJSON API
-// ==========================================
-/**
- * Fetch products dynamically from DummyJSON Products API with error handling
- */
 async function fetchProducts() {
   const gridContainer = document.getElementById('newArrivalsGrid');
   const bestSellersGrid = document.getElementById('bestSellersGrid');
@@ -65,7 +36,7 @@ async function fetchProducts() {
   renderLoadingState();
 
   try {
-    // Fetch products from DummyJSON (default 30 items as specified in praktikum spec)
+
     const response = await fetch('https://dummyjson.com/products');
 
     if (!response.ok) {
@@ -75,14 +46,12 @@ async function fetchProducts() {
     const data = await response.json();
     state.allProducts = data.products || [];
 
-    // Extract unique categories for filter dropdown using Functional Programming
     const uniqueCategories = Array.from(
       new Set(state.allProducts.map((p) => p.category).filter(Boolean))
     ).sort();
     state.categories = uniqueCategories;
     populateCategoryDropdown(uniqueCategories);
 
-    // Initial render
     applyFilterAndSort();
     renderBestSellers();
   } catch (err) {
@@ -94,9 +63,6 @@ async function fetchProducts() {
   }
 }
 
-/**
- * Render visual loading skeleton/state
- */
 function renderLoadingState() {
   const gridContainer = document.getElementById('newArrivalsGrid');
   if (!gridContainer) return;
@@ -118,10 +84,6 @@ function renderLoadingState() {
     .join('');
 }
 
-/**
- * Render visual error banner with retry button
- * @param {string} message 
- */
 function renderErrorState(message) {
   const gridContainer = document.getElementById('newArrivalsGrid');
   if (!gridContainer) return;
@@ -140,18 +102,10 @@ function renderErrorState(message) {
   `;
 }
 
-// ==========================================
-// 3. FILTER, SORT & ARRAY SLICING PAGINATION
-// ==========================================
-/**
- * Populate category <select> options
- * @param {Array<string>} categories 
- */
 function populateCategoryDropdown(categories) {
   const select = document.getElementById('categoryFilter');
   if (!select) return;
 
-  // Keep 'all' option and append fetched categories
   const optionsHtml = ['<option value="all">All Categories</option>']
     .concat(
       categories.map((cat) => {
@@ -164,13 +118,9 @@ function populateCategoryDropdown(categories) {
   select.innerHTML = optionsHtml;
 }
 
-/**
- * Apply filtering (Search + Category) and Sorting using Functional Programming
- */
 function applyFilterAndSort() {
   let list = [...state.allProducts];
 
-  // 1. Filter by Search Query (Product Name or Category)
   if (state.searchTerm.trim() !== '') {
     const q = state.searchTerm.toLowerCase().trim();
     list = list.filter((item) => {
@@ -182,12 +132,10 @@ function applyFilterAndSort() {
     });
   }
 
-  // 2. Filter by Category Dropdown
   if (state.selectedCategory !== 'all') {
     list = list.filter((item) => item.category === state.selectedCategory);
   }
 
-  // 3. Sort using Array.prototype.sort (Functional approach)
   switch (state.selectedSort) {
     case 'price-asc':
       list.sort((a, b) => a.price - b.price);
@@ -202,18 +150,15 @@ function applyFilterAndSort() {
       list.sort((a, b) => a.title.localeCompare(b.title));
       break;
     default:
-      // Featured / default order
+
       break;
   }
 
   state.filteredProducts = list;
-  state.currentPage = 1; // Reset to page 1 on filter/sort change
+  state.currentPage = 1;
   renderProducts();
 }
 
-/**
- * Render the product cards using Array Slicing for Load More pagination
- */
 function renderProducts() {
   const gridContainer = document.getElementById('newArrivalsGrid');
   const countLabel = document.getElementById('productsCountLabel');
@@ -222,8 +167,7 @@ function renderProducts() {
 
   const total = state.filteredProducts.length;
   const currentLimit = state.currentPage * state.pageSize;
-  
-  // Use array slicing to get current batch of products
+
   const slicedProducts = state.filteredProducts.slice(0, currentLimit);
 
   if (countLabel) {
@@ -250,7 +194,6 @@ function renderProducts() {
     .map((product) => generateProductCardHtml(product, 'NEW'))
     .join('');
 
-  // Handle Load More Button visibility
   if (loadMoreBtn) {
     if (currentLimit < total) {
       loadMoreBtn.style.display = 'inline-block';
@@ -261,14 +204,10 @@ function renderProducts() {
   }
 }
 
-/**
- * Render Best Sellers section with high-rated products
- */
 function renderBestSellers() {
   const bestGrid = document.getElementById('bestSellersGrid');
   if (!bestGrid) return;
 
-  // Pick top 8 products sorted by rating & discount
   const topProducts = [...state.allProducts]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8);
@@ -278,12 +217,6 @@ function renderBestSellers() {
     .join('');
 }
 
-/**
- * Generate Product Card HTML template
- * @param {Object} product 
- * @param {string} defaultBadge 
- * @returns {string}
- */
 function generateProductCardHtml(product, defaultBadge = 'NEW') {
   const discount = Math.round(product.discountPercentage || 0);
   const badgeText = discount > 15 ? `-${discount}%` : defaultBadge;
@@ -326,11 +259,6 @@ function generateProductCardHtml(product, defaultBadge = 'NEW') {
   `;
 }
 
-/**
- * Generate 5-star rating SVG icons
- * @param {number} rating 
- * @returns {string}
- */
 function renderStarRating(rating) {
   const rounded = Math.round(rating);
   let stars = '';
@@ -345,12 +273,6 @@ function renderStarRating(rating) {
   return stars;
 }
 
-// ==================================================
-// 4. EVENT DELEGATION FOR PRODUCT DETAIL MODAL
-// ==================================================
-/**
- * Setup Event Delegation on the product grid containers
- */
 function setupEventDelegation() {
   const containers = [
     document.getElementById('newArrivalsGrid'),
@@ -361,7 +283,7 @@ function setupEventDelegation() {
     if (!container) return;
 
     container.addEventListener('click', (event) => {
-      // Ignore clicks on Add to Cart or Wishlist buttons
+
       if (
         event.target.closest('.btn-add-cart') ||
         event.target.closest('.btn-wishlist') ||
@@ -370,7 +292,6 @@ function setupEventDelegation() {
         return;
       }
 
-      // Find closest product card element
       const card = event.target.closest('.product-card');
       if (card && card.dataset.productId) {
         const productId = Number(card.dataset.productId);
@@ -380,10 +301,6 @@ function setupEventDelegation() {
   });
 }
 
-/**
- * Open Product Detail Modal populated with full product details
- * @param {number} productId 
- */
 function openProductModal(productId) {
   const product = state.allProducts.find((p) => p.id === productId);
   if (!product) return;
@@ -434,7 +351,7 @@ function openProductModal(productId) {
         </div>
 
         <h2 class="modal-product-title">${escapeHtml(product.title)}</h2>
-        
+
         <div class="modal-price-box">
           <span class="modal-price-current">$${product.price.toFixed(2)}</span>
           ${discount > 5 ? `<span class="modal-price-original">$${originalPrice}</span>` : ''}
@@ -488,7 +405,6 @@ function openProductModal(productId) {
     </div>
   `;
 
-  // Display modal
   if (typeof modal.showModal === 'function') {
     modal.showModal();
   } else {
@@ -497,9 +413,6 @@ function openProductModal(productId) {
   document.body.style.overflow = 'hidden';
 }
 
-/**
- * Close Product Detail Modal
- */
 function closeProductModal() {
   const modal = document.getElementById('productDetailModal');
   if (!modal) return;
@@ -512,9 +425,6 @@ function closeProductModal() {
   document.body.style.overflow = '';
 }
 
-/**
- * Change active image in modal gallery
- */
 function changeModalImage(src, btn) {
   const mainImg = document.getElementById('modalMainImg');
   if (mainImg) {
@@ -524,9 +434,6 @@ function changeModalImage(src, btn) {
   if (btn) btn.classList.add('active');
 }
 
-/**
- * Adjust quantity inside modal
- */
 function adjustModalQty(delta) {
   const input = document.getElementById('modalQtyInput');
   if (!input) return;
@@ -535,9 +442,6 @@ function adjustModalQty(delta) {
   input.value = val;
 }
 
-/**
- * Add product to cart from inside the modal
- */
 function addModalProductToCart(productId) {
   const product = state.allProducts.find((p) => p.id === productId);
   const input = document.getElementById('modalQtyInput');
@@ -549,12 +453,6 @@ function addModalProductToCart(productId) {
   }
 }
 
-// ==========================================
-// 5. CARD ACTION HANDLERS
-// ==========================================
-/**
- * Handle Add to Cart click from product card
- */
 function handleCardAddToCart(event, productId) {
   event.stopPropagation();
   const product = state.allProducts.find((p) => p.id === productId);
@@ -563,9 +461,6 @@ function handleCardAddToCart(event, productId) {
   }
 }
 
-/**
- * Handle Wishlist toggle
- */
 function toggleWishlist(event, productId) {
   event.stopPropagation();
   const btn = event.currentTarget;
@@ -580,9 +475,6 @@ function toggleWishlist(event, productId) {
   }
 }
 
-/**
- * Reset all filters to default state
- */
 function resetFilters() {
   state.searchTerm = '';
   state.selectedCategory = 'all';
@@ -599,12 +491,6 @@ function resetFilters() {
   applyFilterAndSort();
 }
 
-// ==========================================
-// 6. PROMOTION COUNTDOWN TIMER
-// ==========================================
-/**
- * Initialize promotional offer countdown timer
- */
 function initCountdownTimer() {
   const daysEl = document.getElementById('timerDays');
   const hoursEl = document.getElementById('timerHours');
@@ -613,7 +499,6 @@ function initCountdownTimer() {
 
   if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
 
-  // Set target expiry date (e.g. 2 days, 12 hours from now)
   const targetTime = Date.now() + (2 * 24 * 60 * 60 + 12 * 60 * 60 + 45 * 60 + 5) * 1000;
 
   function update() {
@@ -641,9 +526,6 @@ function initCountdownTimer() {
   setInterval(update, 1000);
 }
 
-// ==========================================
-// 7. UTILITY FUNCTIONS & EVENT LISTENERS
-// ==========================================
 function escapeHtml(str) {
   if (!str) return '';
   return String(str)
@@ -654,17 +536,11 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-/**
- * Initialize event listeners on page load
- */
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initial product fetch
   fetchProducts();
 
-  // 2. Setup Event Delegation
   setupEventDelegation();
 
-  // 3. Search with Debounce (Closure technique)
   const searchInput = document.getElementById('productSearchInput');
   if (searchInput) {
     const debouncedSearch = createDebounce((query) => {
@@ -677,7 +553,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Category Filter listener
   const categoryFilter = document.getElementById('categoryFilter');
   if (categoryFilter) {
     categoryFilter.addEventListener('change', (e) => {
@@ -686,7 +561,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Sorting listener
   const sortBy = document.getElementById('sortBy');
   if (sortBy) {
     sortBy.addEventListener('change', (e) => {
@@ -695,7 +569,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Load More pagination listener
   const loadMoreBtn = document.getElementById('loadMoreBtn');
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
@@ -704,13 +577,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 7. Modal close handlers (Light dismiss, Escape, Backdrop)
   const modal = document.getElementById('productDetailModal');
   const modalCloseBtn = document.getElementById('closeModalBtn');
   if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProductModal);
 
   if (modal) {
-    // Backdrop click dismiss for <dialog>
     modal.addEventListener('click', (e) => {
       const rect = modal.getBoundingClientRect();
       const isInDialog =
@@ -728,7 +599,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Top Announcement Bar dismissal
   const announceCloseBtn = document.getElementById('closeAnnouncementBtn');
   const announcementBar = document.getElementById('announcementBar');
   if (announceCloseBtn && announcementBar) {
@@ -737,7 +607,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 9. Mobile Navigation Drawer toggle
   const mobileMenuToggle = document.getElementById('mobileMenuToggle');
   const mobileNavDrawer = document.getElementById('mobileNavDrawer');
   const mobileNavClose = document.getElementById('mobileNavClose');

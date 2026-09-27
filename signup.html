@@ -6,22 +6,19 @@
   <title>Sign Up — DEERA.</title>
   <meta name="description" content="Create a DEERA account to enjoy exclusive deals, seamless shopping, and fast checkout on everyday essentials.">
 
-  <!-- Google Fonts: Poppins & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Native Stylesheets -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/pages.css">
 
-  <!-- External JS loaded with defer per praktikum requirements -->
   <script src="assets/js/signup.js" defer></script>
 </head>
 <body>
 
   <main class="auth-page-wrapper">
-    <!-- Left Column: Lifestyle Visual & DEERA Branding -->
+
     <div class="auth-visual-col">
       <a href="index.html" class="auth-brand-logo" aria-label="DEERA Homepage">DEERA.</a>
       <div class="auth-visual-img-wrap">
@@ -32,7 +29,6 @@
       </div>
     </div>
 
-    <!-- Right Column: Sign Up Form (Figma 'Sign Up Popup' Specification) -->
     <div class="auth-form-col">
       <div class="auth-form-container">
         <div class="auth-header">
@@ -42,7 +38,6 @@
           </p>
         </div>
 
-        <!-- Visual Error / Success Alert Box -->
         <div id="authAlert" class="auth-alert" role="alert" style="display: none;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
@@ -52,9 +47,8 @@
           <span id="alertMessage">Notification message</span>
         </div>
 
-        <!-- Sign Up Form -->
         <form id="signupForm" novalidate>
-          <!-- Full Name Field -->
+
           <div class="form-group">
             <label for="nameInput" class="form-label">Your name</label>
             <div class="form-input-wrap">
@@ -69,7 +63,6 @@
             </div>
           </div>
 
-          <!-- Username Field -->
           <div class="form-group">
             <label for="usernameInput" class="form-label">Username</label>
             <div class="form-input-wrap">
@@ -84,7 +77,6 @@
             </div>
           </div>
 
-          <!-- Email Address Field -->
           <div class="form-group">
             <label for="emailInput" class="form-label">Email address</label>
             <div class="form-input-wrap">
@@ -99,7 +91,6 @@
             </div>
           </div>
 
-          <!-- Password Field with Show/Hide Toggle -->
           <div class="form-group">
             <label for="passwordInput" class="form-label">Password</label>
             <div class="form-input-wrap">
@@ -120,7 +111,6 @@
             </div>
           </div>
 
-          <!-- Terms Agreement Checkbox -->
           <div class="form-checkbox-row" style="margin-bottom: 24px;">
             <label class="checkbox-label">
               <input type="checkbox" id="termsCheckbox">
@@ -130,7 +120,6 @@
             </label>
           </div>
 
-          <!-- Submit Button with Loading Spinner -->
           <button type="submit" id="submitSignupBtn" class="btn btn-primary btn-lg w-100">
             <span id="btnText">Sign Up</span>
             <span id="btnSpinner" style="display: none; align-items: center; gap: 8px;">

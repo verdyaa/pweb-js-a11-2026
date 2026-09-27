@@ -1,11 +1,7 @@
-/* Cart page (cart.html) and Checkout page (checkout.html) styles.
-   Loaded after style.css + pages.css; reuses their design tokens. */
-
 .cart-page-main {
   padding: 40px 0 80px;
 }
 
-/* The hidden attribute must beat display rules like grid/flex. */
 [hidden] {
   display: none !important;
 }
@@ -18,7 +14,6 @@
   margin-bottom: 8px;
 }
 
-/* Full-page state shown when the cart is empty or checkout has nothing to buy. */
 .state-block {
   text-align: center;
   padding: 72px 16px;
@@ -44,7 +39,6 @@
   margin-bottom: 24px;
 }
 
-/* Line items on the left, sticky summary on the right. */
 .cart-layout {
   display: grid;
   grid-template-columns: 1fr 380px;
@@ -508,7 +502,6 @@ textarea.field__control {
     position: static;
   }
 
-  /* Checkout: order summary floats above the form on small screens. */
   .checkout-summary {
     order: -1;
   }
@@ -564,10 +557,6 @@ textarea.field__control {
     grid-template-columns: 1fr;
   }
 }
-
-/* ==========================================================================
-   Order history page (orders.html)
-   ========================================================================== */
 
 .orders-list {
   display: flex;

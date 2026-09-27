@@ -1,7 +1,5 @@
-/* --- Import Google Fonts --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
 
-/* --- Variabel & Reset Global --- */
 :root {
   --color-primary: #141414;
   --color-secondary: #606060;
@@ -24,14 +22,12 @@ body {
   color: var(--color-primary);
 }
 
-/* --- Layout Halaman Sign Up (Split Screen) --- */
 .auth-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
 }
 
-/* Sisi Kiri: Gambar Kursi & Background Abu */
 .auth-image-side {
   background-color: var(--color-bg-light);
   padding: 40px 60px;
@@ -64,7 +60,6 @@ body {
   object-fit: contain;
 }
 
-/* Sisi Kanan: Form Pendaftaran */
 .auth-form-side {
   display: flex;
   align-items: center;
@@ -101,7 +96,6 @@ body {
   text-decoration: underline;
 }
 
-/* --- Input & Form Elements --- */
 .form-group {
   margin-bottom: 24px;
   position: relative;
@@ -127,7 +121,6 @@ body {
   border-bottom-color: var(--color-primary);
 }
 
-/* Tombol Mata (Password Toggle) */
 .password-group {
   position: relative;
 }
@@ -148,7 +141,6 @@ body {
   color: var(--color-primary);
 }
 
-/* Checkbox Terms */
 .form-checkbox-group {
   margin-bottom: 32px;
   font-size: 13px;
@@ -181,7 +173,6 @@ body {
   text-decoration: underline;
 }
 
-/* Tombol Utama (Sign Up) */
 .btn-black {
   background-color: var(--color-primary);
   color: #FFFFFF;
@@ -199,13 +190,12 @@ body {
   opacity: 0.85;
 }
 
-/* --- Responsif untuk Layar Mobile (< 768px) --- */
 @media (max-width: 768px) {
   .auth-container {
     grid-template-columns: 1fr;
   }
   .auth-image-side {
-    display: none; /* Sembunyikan banner kursi di perangkat seluler */
+    display: none; 
   }
   .auth-form-side {
     padding: 24px;

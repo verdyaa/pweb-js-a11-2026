@@ -1,15 +1,5 @@
-/**
- * DEERA. E-Commerce - Cart Management & LocalStorage CRUD
- * Provides full CRUD operations for the shopping cart persisted in LocalStorage,
- * badge count updates, and interactive slide-out cart drawer.
- */
-
 const CART_STORAGE_KEY = 'deera_cart';
 
-/**
- * Retrieve current cart from LocalStorage (Read)
- * @returns {Array} Array of cart items
- */
 function getCart() {
   try {
     const raw = localStorage.getItem(CART_STORAGE_KEY);
@@ -20,10 +10,6 @@ function getCart() {
   }
 }
 
-/**
- * Save cart to LocalStorage and notify listeners (Create / Update)
- * @param {Array} cart 
- */
 function saveCart(cart) {
   try {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
@@ -35,11 +21,6 @@ function saveCart(cart) {
   }
 }
 
-/**
- * Add an item to cart (Create or Update)
- * @param {Object} product 
- * @param {number} quantity 
- */
 function addToCart(product, quantity = 1) {
   if (!product || !product.id) return;
 
@@ -64,11 +45,6 @@ function addToCart(product, quantity = 1) {
   showToast(`Added "${product.title}" to cart!`);
 }
 
-/**
- * Update quantity for an item (Update)
- * @param {number} productId 
- * @param {number} delta 
- */
 function updateCartItemQuantity(productId, delta) {
   let cart = getCart();
   const item = cart.find((i) => Number(i.id) === Number(productId));
@@ -84,24 +60,17 @@ function updateCartItemQuantity(productId, delta) {
   saveCart(cart);
 }
 
-/**
- * Remove an item from the cart (Delete)
- * @param {number} productId 
- */
 function removeFromCart(productId) {
   const cart = getCart();
   const item = cart.find((i) => Number(i.id) === Number(productId));
   const newCart = cart.filter((i) => Number(i.id) !== Number(productId));
   saveCart(newCart);
-  
+
   if (item) {
     showToast(`Removed "${item.title}" from cart.`);
   }
 }
 
-/**
- * Clear all items from cart (Delete all)
- */
 function clearCart() {
   localStorage.removeItem(CART_STORAGE_KEY);
   updateCartBadge();
@@ -109,10 +78,6 @@ function clearCart() {
   window.dispatchEvent(new CustomEvent('cartUpdated', { detail: { cart: [] } }));
 }
 
-/**
- * Calculate totals: item count and total monetary price
- * @returns {{ count: number, total: number }}
- */
 function getCartSummary() {
   const cart = getCart();
   const count = cart.reduce((acc, item) => acc + (item.quantity || 0), 0);
@@ -120,9 +85,6 @@ function getCartSummary() {
   return { count, total };
 }
 
-/**
- * Update cart badge icons in header/navbar
- */
 function updateCartBadge() {
   const { count } = getCartSummary();
   const badges = document.querySelectorAll('.cart-badge');
@@ -132,9 +94,6 @@ function updateCartBadge() {
   });
 }
 
-/**
- * Render the slide-out Cart Drawer content
- */
 function renderCartDrawer() {
   const drawerBody = document.getElementById('cartDrawerBody');
   const drawerFooter = document.getElementById('cartDrawerFooter');
@@ -205,9 +164,6 @@ function renderCartDrawer() {
   }
 }
 
-/**
- * Open Cart Drawer
- */
 function openCartDrawer() {
   const drawer = document.getElementById('cartDrawer');
   const overlay = document.getElementById('cartDrawerOverlay');
@@ -219,9 +175,6 @@ function openCartDrawer() {
   }
 }
 
-/**
- * Close Cart Drawer
- */
 function closeCartDrawer() {
   const drawer = document.getElementById('cartDrawer');
   const overlay = document.getElementById('cartDrawerOverlay');
@@ -232,10 +185,6 @@ function closeCartDrawer() {
   }
 }
 
-/**
- * Toast Notification system
- * @param {string} message 
- */
 function showToast(message) {
   let toastContainer = document.getElementById('deeraToastContainer');
   if (!toastContainer) {
@@ -256,7 +205,6 @@ function showToast(message) {
 
   toastContainer.appendChild(toast);
 
-  // Trigger animation
   requestAnimationFrame(() => {
     toast.classList.add('visible');
   });
@@ -269,11 +217,9 @@ function showToast(message) {
   }, 2800);
 }
 
-// Global initialization
 document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge();
 
-  // Attach drawer open listeners
   document.querySelectorAll('.open-cart-btn').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();

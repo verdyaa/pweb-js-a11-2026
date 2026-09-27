@@ -1,11 +1,6 @@
-// cart-page.js: full Cart page logic for cart.html.
-// Reuses helpers from cart.js (getCart, saveCart, getCartSummary, showToast)
-// and auth.js (getCurrentUser). Persists totals to deera_checkout for checkout.html.
-
 (function () {
   const CHECKOUT_STATE_KEY = 'deera_checkout';
 
-  // Shipping choices; value is the flat USD cost added to the subtotal.
   const SHIPPING = {
     free: { label: 'Free shipping', cost: 0 },
     express: { label: 'Express shipping', cost: 15 },
@@ -17,7 +12,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    // Login guard: cart is protected, bounce to login when no session.
+
     if (typeof getCurrentUser === 'function' && !getCurrentUser()) {
       window.location.replace('login.html');
       return;
@@ -34,7 +29,6 @@
 
     render();
 
-    // Qty steppers and remove buttons, via delegation on the stable list.
     listEl.addEventListener('click', function (e) {
       const btn = e.target.closest('[data-action]');
       if (!btn) return;
@@ -49,7 +43,6 @@
       render();
     });
 
-    // Shipping radios re-render on change to recompute totals.
     summaryEl.addEventListener('change', function (e) {
       if (e.target.name === 'shipping') {
         shippingType = e.target.value;
@@ -63,7 +56,6 @@
       return { subtotal: subtotal, shippingCost: shippingCost, total: subtotal + shippingCost };
     }
 
-    // Save totals so checkout reads them without recomputing.
     function persistCheckoutState() {
       const t = computeTotals();
       localStorage.setItem(CHECKOUT_STATE_KEY, JSON.stringify({
@@ -128,7 +120,6 @@
     }
   });
 
-  // Local escape for values coming from localStorage.
   function escapeHtml(str) {
     return String(str)
       .replace(/&/g, '&amp;')

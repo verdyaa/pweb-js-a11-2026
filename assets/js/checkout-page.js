@@ -1,8 +1,3 @@
-// checkout.js (page): checkout form autofill, validation, order summary,
-// place-order flow, and the order-complete screen for checkout.html.
-// Reuses cart.js helpers and auth.js getCurrentUser. Simple test checkout:
-// no funds check, every valid submission succeeds.
-
 (function () {
   const CHECKOUT_STATE_KEY = 'deera_checkout';
   const ORDERS_KEY = 'deera_orders';
@@ -11,7 +6,6 @@
     return '$' + Number(value).toFixed(2);
   }
 
-  // Required fields and their validation rules.
   const RULES = {
     'firstName': { required: true, msg: 'First name is required.' },
     'lastName': { required: true, msg: 'Last name is required.' },
@@ -36,7 +30,6 @@
     const emptyEl = document.getElementById('checkoutEmpty');
     const completeEl = document.getElementById('orderComplete');
 
-    // Empty guard: nothing to buy means show the empty state.
     const cart = getCart();
     if (!cart.length) {
       layoutEl.hidden = true;
@@ -81,7 +74,6 @@
           '</div>';
       }).join('');
 
-      // Totals come from the cart page. Recompute if the key is missing.
       let state = JSON.parse(localStorage.getItem(CHECKOUT_STATE_KEY) || 'null');
       if (!state) {
         const subtotal = cart.reduce(function (s, i) {
@@ -200,7 +192,6 @@
       orders.unshift(order);
       localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
 
-      // Clear the cart via the shared helper so badge and drawer update too.
       if (typeof clearCart === 'function') {
         clearCart();
       } else {

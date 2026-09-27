@@ -1,21 +1,11 @@
-/**
- * DEERA. E-Commerce - Authentication & Session Management
- * Handles user login against DummyJSON API, session persistence via LocalStorage,
- * navigation bar user status rendering, and logout functionality.
- */
-
 const AUTH_STORAGE_KEY = 'deera_user';
 const FIRST_NAME_KEY = 'firstName';
 
-/**
- * Get current logged in user from localStorage
- * @returns {Object|null}
- */
 function getCurrentUser() {
   try {
     const raw = localStorage.getItem(AUTH_STORAGE_KEY);
     if (!raw) {
-      // Fallback check for firstName
+
       const firstName = localStorage.getItem(FIRST_NAME_KEY);
       if (firstName) {
         return { firstName, username: localStorage.getItem('username') || firstName };
@@ -29,21 +19,15 @@ function getCurrentUser() {
   }
 }
 
-/**
- * Authenticate user with DummyJSON Users API
- * @param {string} username 
- * @param {string} password 
- * @returns {Promise<Object>}
- */
 async function loginUser(username, password) {
   if (!username || !password) {
     throw new Error('Please enter both username and password.');
   }
 
   try {
-    // Fetch users from DummyJSON API
+
     const response = await fetch('https://dummyjson.com/users?limit=100');
-    
+
     if (!response.ok) {
       throw new Error(`Server returned status ${response.status}. Please try again later.`);
     }
@@ -51,7 +35,6 @@ async function loginUser(username, password) {
     const data = await response.json();
     const users = data.users || [];
 
-    // Authenticate credentials against API response
     const matchedUser = users.find(
       (u) => u.username.toLowerCase() === username.trim().toLowerCase() && u.password === password
     );
@@ -60,7 +43,6 @@ async function loginUser(username, password) {
       throw new Error('Invalid username or password. Please check your credentials.');
     }
 
-    // Persist session to LocalStorage (as required in praktikum spec)
     const sessionData = {
       id: matchedUser.id,
       username: matchedUser.username,
@@ -84,55 +66,35 @@ async function loginUser(username, password) {
   }
 }
 
-/**
- * Auth Guard (Proteksi Halaman)
- * Sesuai spesifikasi praktikum:
- * "Halaman ini tidak boleh dapat diakses jika pengguna belum login (mengecek keberadaan data di Local Storage).
- * Jika belum login, redirect paksa kembali ke login.html."
- */
 function checkAuthGuard() {
   const path = window.location.pathname.toLowerCase();
   const isAuthPage = path.endsWith('login.html') || path.endsWith('signup.html');
-  
+
   if (isAuthPage) return;
 
   const firstName = localStorage.getItem(FIRST_NAME_KEY);
   const user = getCurrentUser();
 
   if (!firstName && !user) {
-    // Redirect paksa kembali ke login.html
+
     window.location.replace('login.html');
   }
 }
 
-// Immediately enforce Auth Guard on protected pages
 checkAuthGuard();
 
-/**
- * Log out user by clearing LocalStorage session
- * Sesuai spesifikasi praktikum:
- * "Sediakan tombol Logout yang akan menghapus data sesi pengguna dari Local Storage (localStorage.removeItem)
- * dan mengarahkan kembali ke halaman login."
- */
 function logoutUser() {
   localStorage.removeItem(AUTH_STORAGE_KEY);
   localStorage.removeItem(FIRST_NAME_KEY);
   localStorage.removeItem('username');
-  
-  // Show notification toast if available
+
   if (typeof showToast === 'function') {
     showToast('You have been logged out.');
   }
 
-  // Redirect to login.html per praktikum requirement
   window.location.href = 'login.html';
 }
 
-/**
- * Update Navbar User Status based on LocalStorage session
- * Sesuai spesifikasi praktikum:
- * "Menampilkan ucapan selamat datang beserta nama pengguna yang diambil dari Local Storage (localStorage.getItem)."
- */
 function updateNavAuthUI() {
   const authContainer = document.getElementById('navAuthContainer');
   const mobileContainer = document.getElementById('mobileNavAuth');
@@ -142,7 +104,7 @@ function updateNavAuthUI() {
 
   if (displayName) {
     if (authContainer) {
-      // User is logged in: show greeting and user dropdown menu
+
       authContainer.innerHTML = `
         <div class="user-profile-menu" id="userProfileMenu">
           <button class="user-greeting-btn" id="userGreetingBtn" aria-expanded="false" title="Account Menu">
@@ -193,7 +155,6 @@ function updateNavAuthUI() {
         </div>
       `;
 
-      // Dropdown toggle handling
       const trigger = document.getElementById('userGreetingBtn');
       const dropdown = document.getElementById('userDropdownCard');
       const logoutBtn = document.getElementById('logoutBtn');
@@ -229,7 +190,7 @@ function updateNavAuthUI() {
       `;
     }
   } else {
-    // User is not logged in: show clean user icon linking to login page
+
     if (authContainer) {
       authContainer.innerHTML = `
         <a href="login.html" class="nav-icon-link" title="Sign In / Log In" aria-label="Sign In">
@@ -243,7 +204,6 @@ function updateNavAuthUI() {
   }
 }
 
-// Automatically initialize auth state when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
   checkAuthGuard();
   updateNavAuthUI();

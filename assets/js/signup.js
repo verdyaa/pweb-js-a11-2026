@@ -1,22 +1,3 @@
-/**
- * ==========================================================================
- * DEERA. E-Commerce - Sign Up Page JavaScript (Teammate Task)
- * Praktikum Pemrograman Web - Modul 2
- *
- * SPECIFICATION CHECKLIST:
- * [x] Form Sign Up: Input your name, username, email, password, terms checkbox
- * [x] Password Visibility Toggle: Eye icon button to reveal/hide password
- * [x] Client-Side Validation: Validates required inputs, email format, and password length
- * [x] Terms Agreement Verification: Checks if user agreed to terms
- * [x] Loading State: Shows visual indicator during registration process
- * [x] Account Creation & Persistence: Stores registered user in localStorage
- * [x] Auto Redirect: Directs to login.html with auto-filled credentials upon success
- * ==========================================================================
- */
-
-// ==========================================================================
-// [TASK 1] DOM Element Selection
-// ==========================================================================
 const signupForm = document.getElementById('signupForm');
 const nameInput = document.getElementById('nameInput');
 const usernameInput = document.getElementById('usernameInput');
@@ -30,9 +11,6 @@ const btnSpinner = document.getElementById('btnSpinner');
 const authAlert = document.getElementById('authAlert');
 const alertMessage = document.getElementById('alertMessage');
 
-// ==========================================================================
-// [TASK 2] Password Visibility Toggle
-// ==========================================================================
 if (passwordToggleBtn && passwordInput) {
   passwordToggleBtn.addEventListener('click', () => {
     const isPassword = passwordInput.type === 'password';
@@ -42,9 +20,6 @@ if (passwordToggleBtn && passwordInput) {
   });
 }
 
-// ==========================================================================
-// [TASK 3] Alert Helpers (Error / Success)
-// ==========================================================================
 function showError(message) {
   if (!authAlert || !alertMessage) return;
   authAlert.className = 'auth-alert alert-danger';
@@ -65,9 +40,6 @@ function hideAlert() {
   }
 }
 
-// ==========================================================================
-// [TASK 4] Loading State Management
-// ==========================================================================
 function setLoadingState(isLoading) {
   if (!submitSignupBtn) return;
   submitSignupBtn.disabled = isLoading;
@@ -75,18 +47,12 @@ function setLoadingState(isLoading) {
   if (btnSpinner) btnSpinner.style.display = isLoading ? 'inline-flex' : 'none';
 }
 
-// ==========================================================================
-// [TASK 5] Validation Helper Functions
-// ==========================================================================
 function isValidEmail(email) {
-  // RFC 5322 standard email regex pattern
+
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
 }
 
-// ==========================================================================
-// [TASK 6] Form Submission, Validation & Registration Handling
-// ==========================================================================
 if (signupForm) {
   signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -98,7 +64,6 @@ if (signupForm) {
     const password = passwordInput ? passwordInput.value : '';
     const termsAgreed = termsCheckbox ? termsCheckbox.checked : false;
 
-    // 1. Check for empty fields
     if (!fullName) {
       showError('Please enter your full name.');
       if (nameInput) nameInput.focus();
@@ -117,35 +82,30 @@ if (signupForm) {
       return;
     }
 
-    // 2. Validate email format
     if (!isValidEmail(email)) {
       showError('Please enter a valid email address (e.g. name@domain.com).');
       if (emailInput) emailInput.focus();
       return;
     }
 
-    // 3. Validate password strength/length
     if (!password || password.length < 6) {
       showError('Password must be at least 6 characters long.');
       if (passwordInput) passwordInput.focus();
       return;
     }
 
-    // 4. Validate terms checkbox
     if (!termsAgreed) {
       showError('You must agree with the Privacy Policy and Terms of Use.');
       if (termsCheckbox) termsCheckbox.focus();
       return;
     }
 
-    // Step: Enter Loading State
     setLoadingState(true);
 
     try {
-      // Simulate API network latency (800ms) for realistic UX and loading demo
+
       await new Promise((resolve) => setTimeout(resolve, 800));
 
-      // Save newly registered user to localStorage for session continuity
       const registeredUser = {
         name: fullName,
         username: username,
@@ -154,7 +114,6 @@ if (signupForm) {
         registeredAt: new Date().toISOString()
       };
 
-      // Store in users list or temporary signup cache
       let existingUsers = [];
       try {
         existingUsers = JSON.parse(localStorage.getItem('deera_registered_users') || '[]');
@@ -164,13 +123,10 @@ if (signupForm) {
       existingUsers.push(registeredUser);
       localStorage.setItem('deera_registered_users', JSON.stringify(existingUsers));
 
-      // Also set prefill info for login page convenience
       localStorage.setItem('prefill_username', username);
 
-      // Display success message
       showSuccess('Account created successfully! Redirecting you to sign in...');
 
-      // Redirect to login page after 1.2 seconds
       setTimeout(() => {
         window.location.href = 'login.html';
       }, 1200);

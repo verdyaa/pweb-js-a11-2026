@@ -5,23 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DEERA. — Online Store &amp; Everyday Essentials</title>
   <meta name="description" content="Discover everyday essentials, curated lifestyle goods, beauty, home decor, and daily favorites at DEERA. Quality products for your everyday life.">
-  
-  <!-- Google Fonts: Poppins & Inter (Native CSS Import) -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Native Stylesheets -->
+
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- External JavaScript loaded with defer as mandated by praktikum requirements -->
   <script src="assets/js/cart.js" defer></script>
   <script src="assets/js/auth.js" defer></script>
   <script src="assets/js/app.js" defer></script>
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
   <aside class="announcement-bar" id="announcementBar" aria-label="Store Announcement">
     <div class="announcement-content">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -45,16 +41,14 @@
     </button>
   </aside>
 
-  <!-- Site Navigation Header -->
   <header class="site-header hero-header">
     <div class="container">
       <nav class="navbar" aria-label="Main Navigation">
-        <!-- Brand Logo -->
+
         <a href="index.html" class="brand-logo" aria-label="DEERA. Homepage">
           DEERA.
         </a>
 
-        <!-- Desktop Navigation Links -->
         <ul class="nav-links">
           <li><a href="index.html" class="nav-link active">Home</a></li>
           <li><a href="#newArrivals" class="nav-link">Shop Catalog</a></li>
@@ -62,9 +56,8 @@
           <li><a href="cart.html" class="nav-link">Cart</a></li>
         </ul>
 
-        <!-- Navigation Actions (Search, Auth User Greeting/Menu, Cart, Mobile Toggle) -->
         <div class="nav-actions">
-          <!-- Search trigger -->
+
           <a href="#newArrivals" class="nav-action-btn" title="Search catalog" aria-label="Search">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"></circle>
@@ -72,7 +65,6 @@
             </svg>
           </a>
 
-          <!-- User Session Status (Dynamically populated by auth.js with localStorage check) -->
           <div id="navAuthContainer">
             <a href="login.html" class="nav-icon-link" title="Sign In" aria-label="Sign In">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -82,7 +74,6 @@
             </a>
           </div>
 
-          <!-- Shopping Cart Trigger Button with badge -->
           <button type="button" class="nav-action-btn open-cart-btn" aria-label="Open Cart" title="View Cart">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -92,7 +83,6 @@
             <span class="cart-badge" style="display: none;">0</span>
           </button>
 
-          <!-- Mobile Hamburger Toggle Button -->
           <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open mobile menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -105,11 +95,10 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero-section" id="hero">
     <div class="container">
       <div class="hero-grid">
-        <!-- Left Hero Media: Curated everyday essentials & lifestyle collection -->
+
         <div class="hero-media">
           <img 
             src="assets/images/hero-general-store.jpg" 
@@ -120,7 +109,6 @@
           >
         </div>
 
-        <!-- Right Hero Content -->
         <div class="hero-content">
           <h1 class="hero-title">
             Everything you need, <span class="highlight-blue">all in one</span> place.
@@ -136,18 +124,16 @@
     </div>
   </section>
 
-  <!-- Section: New Arrivals & Dynamic Product Catalog -->
   <section class="section-padding" id="newArrivals">
     <div class="container">
-      <!-- Section Title & Header Link -->
+
       <div class="section-header-row">
         <h2 class="section-title">New Arrivals</h2>
         <a href="#newArrivals" class="section-header-link">Browse Catalog &darr;</a>
       </div>
 
-      <!-- Real-Time Search (Debounce Closure) & Functional Filtering/Sorting Toolbar -->
       <div class="catalog-toolbar">
-        <!-- Debounced Real-time Search Box -->
+
         <div class="search-box">
           <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8"></circle>
@@ -162,16 +148,14 @@
           >
         </div>
 
-        <!-- Filter & Sort Dropdowns -->
         <div class="filter-controls-group">
-          <!-- Category Filter Dropdown -->
+
           <div class="select-filter-wrap">
             <select id="categoryFilter" class="select-filter" aria-label="Filter products by category">
               <option value="all">All Categories</option>
             </select>
           </div>
 
-          <!-- Sorting Dropdown -->
           <div class="select-filter-wrap">
             <select id="sortBy" class="select-filter" aria-label="Sort products">
               <option value="default">Featured / Default</option>
@@ -184,17 +168,14 @@
         </div>
       </div>
 
-      <!-- Live Catalog Count & Status -->
       <div class="catalog-status-bar">
         <span id="productsCountLabel">Loading catalog from API...</span>
       </div>
 
-      <!-- Dynamic Product Cards Grid (Event Delegation Target for Detail Modal) -->
       <div id="newArrivalsGrid" class="product-grid" aria-live="polite">
-        <!-- Dynamically rendered via app.js -->
+
       </div>
 
-      <!-- Load More / Pagination Button (Array Slicing) -->
       <div class="pagination-wrap">
         <button type="button" id="loadMoreBtn" class="btn btn-outline btn-lg" style="display: none;">
           Load More
@@ -203,9 +184,6 @@
     </div>
   </section>
 
-
-
-  <!-- Section: Best Seller Grid -->
   <section class="section-padding" style="padding-top: 20px;">
     <div class="container">
       <div class="section-header-row">
@@ -213,18 +191,16 @@
         <a href="#newArrivals" class="section-header-link">View All &rarr;</a>
       </div>
 
-      <!-- Best Seller Cards Grid (Event Delegation handled via container) -->
       <div id="bestSellersGrid" class="product-grid">
-        <!-- Rendered dynamically via app.js -->
+
       </div>
     </div>
   </section>
 
-  <!-- Section: Values & Service Features -->
   <section class="values-section" id="benefits" aria-label="Customer Benefits">
     <div class="container">
       <div class="values-grid">
-        <!-- Value 1 -->
+
         <div class="value-card">
           <div class="value-icon">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
@@ -238,7 +214,6 @@
           <p class="value-desc">Order above $200</p>
         </div>
 
-        <!-- Value 2 -->
         <div class="value-card">
           <div class="value-icon">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
@@ -250,7 +225,6 @@
           <p class="value-desc">30 days guarantee</p>
         </div>
 
-        <!-- Value 3 -->
         <div class="value-card">
           <div class="value-icon">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
@@ -262,7 +236,6 @@
           <p class="value-desc">Secured by Stripe</p>
         </div>
 
-        <!-- Value 4 -->
         <div class="value-card">
           <div class="value-icon">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
@@ -276,10 +249,9 @@
     </div>
   </section>
 
-  <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container">
-      <!-- Top Row: Brand & Navigation -->
+
       <div class="footer-top-row">
         <div class="footer-brand-wrap">
           <span class="footer-brand-logo">DEERA.</span>
@@ -296,7 +268,6 @@
 
       <div class="footer-divider"></div>
 
-      <!-- Bottom Row: Copyright, Legal & Socials -->
       <div class="footer-bottom-row">
         <div class="footer-legal-links">
           <span>Copyright &copy; 2026 DEERA. All rights reserved</span>
@@ -328,17 +299,15 @@
     </div>
   </footer>
 
-  <!-- Native HTML5 Dialog: Product Detail Modal (Triggered via Event Delegation) -->
   <dialog id="productDetailModal" class="product-modal" aria-labelledby="modalProductTitle">
     <div class="modal-header-bar">
       <button type="button" class="modal-close-btn" id="closeModalBtn" aria-label="Close Product Details">&times;</button>
     </div>
     <div class="modal-body" id="modalProductBody">
-      <!-- Populated dynamically via openProductModal() in app.js -->
+
     </div>
   </dialog>
 
-  <!-- Slide-Out Shopping Cart Drawer -->
   <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
   <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
     <div class="cart-drawer-header">
@@ -346,14 +315,13 @@
       <button type="button" class="modal-close-btn" id="closeCartDrawerBtn" aria-label="Close Cart">&times;</button>
     </div>
     <div class="cart-drawer-body" id="cartDrawerBody">
-      <!-- Rendered dynamically via cart.js -->
+
     </div>
     <div class="cart-drawer-footer" id="cartDrawerFooter">
-      <!-- Subtotal and actions rendered via cart.js -->
+
     </div>
   </aside>
 
-  <!-- Mobile Navigation Drawer -->
   <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
   <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
     <div>
