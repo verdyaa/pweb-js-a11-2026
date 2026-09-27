@@ -65,8 +65,8 @@ async function fetchProducts() {
   renderLoadingState();
 
   try {
-    // Fetch products from DummyJSON
-    const response = await fetch('https://dummyjson.com/products?limit=100');
+    // Fetch products from DummyJSON (default 30 items as specified in praktikum spec)
+    const response = await fetch('https://dummyjson.com/products');
 
     if (!response.ok) {
       throw new Error(`Failed to fetch catalog from DummyJSON: HTTP status ${response.status}`);
@@ -304,7 +304,7 @@ function generateProductCardHtml(product, defaultBadge = 'NEW') {
           alt="${escapeHtml(product.title)}" 
           loading="lazy" 
           class="product-thumb"
-          onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80'"
+          onerror="this.src='https://dummyjson.com/image/300x300?text=DEERA+Product'"
         />
         <button type="button" class="btn-add-cart" onclick="handleCardAddToCart(event, ${product.id})">
           Add to cart
@@ -762,22 +762,4 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', openMobileNav);
   if (mobileNavClose) mobileNavClose.addEventListener('click', closeMobileNav);
   if (mobileNavOverlay) mobileNavOverlay.addEventListener('click', closeMobileNav);
-
-  // 10. Promotional Countdown Timer
-  initCountdownTimer();
-
-  // 11. Newsletter Form submit
-  const newsletterForm = document.getElementById('newsletterForm');
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailInput = document.getElementById('newsletterEmail');
-      if (emailInput && emailInput.value.trim()) {
-        if (typeof showToast === 'function') {
-          showToast(`Thank you! ${emailInput.value.trim()} has been subscribed to DEERA newsletter.`);
-        }
-        emailInput.value = '';
-      }
-    });
-  }
 });

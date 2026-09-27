@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEERA. — Premium Audio &amp; Headphone Store</title>
-  <meta name="description" content="Discover premium headphones, earbuds, and audio accessories at DEERA. Experience music like never before.">
+  <title>DEERA. — Online Store &amp; Everyday Essentials</title>
+  <meta name="description" content="Discover everyday essentials, curated lifestyle goods, beauty, home decor, and daily favorites at DEERA. Quality products for your everyday life.">
   
   <!-- Google Fonts: Poppins & Inter (Native CSS Import) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,9 +57,9 @@
         <!-- Desktop Navigation Links -->
         <ul class="nav-links">
           <li><a href="index.html" class="nav-link active">Home</a></li>
-          <li><a href="#newArrivals" class="nav-link">Shop</a></li>
-          <li><a href="#collections" class="nav-link">Collections</a></li>
-          <li><a href="#newsletter" class="nav-link">Contact Us</a></li>
+          <li><a href="#newArrivals" class="nav-link">Shop Catalog</a></li>
+          <li><a href="#benefits" class="nav-link">Why Us</a></li>
+          <li><a href="cart.html" class="nav-link">Cart</a></li>
         </ul>
 
         <!-- Navigation Actions (Search, Auth User Greeting/Menu, Cart, Mobile Toggle) -->
@@ -109,12 +109,13 @@
   <section class="hero-section" id="hero">
     <div class="container">
       <div class="hero-grid">
-        <!-- Left Hero Media: Smiling man with blue headphones and smartphone -->
+        <!-- Left Hero Media: Curated everyday essentials & lifestyle collection -->
         <div class="hero-media">
           <img 
-            src="assets/images/hero-person.png" 
-            alt="Person enjoying music with DEERA headphones" 
+            src="assets/images/hero-general-store.jpg" 
+            alt="Curated everyday essentials, home goods, and lifestyle products" 
             class="hero-person-img"
+            style="border-radius: 20px; max-height: 520px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); object-fit: cover;"
             fetchpriority="high"
           >
         </div>
@@ -122,23 +123,16 @@
         <!-- Right Hero Content -->
         <div class="hero-content">
           <h1 class="hero-title">
-            Listen to the <span class="highlight-blue">amazing</span> music sound.
+            Everything you need, <span class="highlight-blue">all in one</span> place.
           </h1>
           <p class="hero-subtitle">
-            Experience music like never before with next-generation acoustic engineering.
+            Discover curated everyday essentials from top categories — from beauty &amp; fragrances to home decor and daily groceries.
           </p>
           <a href="#newArrivals" class="hero-btn">
-            Shopping Now
+            Explore Catalog &darr;
           </a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Partner Brand Logos Section -->
-  <section class="brand-logos-section" aria-label="Partner Brands">
-    <div class="container">
-      <img src="assets/images/brand-logos.png" alt="Trusted Partner Brands" class="brand-logos-banner-img" loading="lazy">
     </div>
   </section>
 
@@ -209,34 +203,7 @@
     </div>
   </section>
 
-  <!-- Section: Shop Collection -->
-  <section class="collection-section" id="collections" aria-label="Shop Collections">
-    <div class="container">
-      <div class="section-header-row">
-        <h2 class="section-title">Shop Collection</h2>
-      </div>
 
-      <div class="collection-grid">
-        <!-- Large Left Banner: Headband -->
-        <a href="#newArrivals" class="collection-banner collection-banner-large" title="Browse Headbands">
-          <img src="assets/images/collection-headband.png" alt="Headband Collection" class="collection-banner-img" loading="lazy">
-        </a>
-
-        <!-- Right Column: Earbuds and Accessories -->
-        <div class="collection-right-col">
-          <!-- Earbuds Banner -->
-          <a href="#newArrivals" class="collection-banner collection-banner-small" title="Browse Earbuds">
-            <img src="assets/images/collection-earbuds.png" alt="Earbuds Collection" class="collection-banner-img" loading="lazy">
-          </a>
-
-          <!-- Accessories Banner -->
-          <a href="#newArrivals" class="collection-banner collection-banner-small" title="Browse Accessories">
-            <img src="assets/images/collection-accessories.png" alt="Accessories Collection" class="collection-banner-img" loading="lazy">
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Section: Best Seller Grid -->
   <section class="section-padding" style="padding-top: 20px;">
@@ -253,51 +220,8 @@
     </div>
   </section>
 
-  <!-- Section: Promotional Banner with Live Countdown Timer -->
-  <section class="promo-section" aria-label="Special Promotion">
-    <div class="container">
-      <div class="promo-container">
-        <!-- Left Banner Image -->
-        <div class="promo-img-col">
-          <img src="assets/images/promo-guy.png" alt="Man with sunglasses wearing DEERA headphones" loading="lazy">
-        </div>
-
-        <!-- Right Promotional Copy & Countdown Timer -->
-        <div class="promo-content-col">
-          <span class="promo-eyebrow">Promotion</span>
-          <h2 class="promo-title">Hurry up! 40% OFF</h2>
-          <p class="promo-desc">Thousands of high tech audio gear are waiting for you.</p>
-
-          <p class="countdown-label">Offer expires in:</p>
-          <div class="countdown-timer-grid">
-            <div class="timer-box">
-              <span class="timer-num" id="timerDays">02</span>
-              <span class="timer-unit">Days</span>
-            </div>
-            <div class="timer-box">
-              <span class="timer-num" id="timerHours">12</span>
-              <span class="timer-unit">Hours</span>
-            </div>
-            <div class="timer-box">
-              <span class="timer-num" id="timerMinutes">45</span>
-              <span class="timer-unit">Minutes</span>
-            </div>
-            <div class="timer-box">
-              <span class="timer-num" id="timerSeconds">05</span>
-              <span class="timer-unit">Seconds</span>
-            </div>
-          </div>
-
-          <div>
-            <a href="#newArrivals" class="btn btn-primary btn-lg">Shop now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Section: Values & Service Features -->
-  <section class="values-section" aria-label="Customer Benefits">
+  <section class="values-section" id="benefits" aria-label="Customer Benefits">
     <div class="container">
       <div class="values-grid">
         <!-- Value 1 -->
@@ -352,72 +276,6 @@
     </div>
   </section>
 
-  <!-- Section: Instagram Newsfeed -->
-  <section class="instagram-section" aria-label="Social Feed">
-    <div class="container">
-      <span class="insta-eyebrow">Newsfeed</span>
-      <h2 class="insta-title">Instagram</h2>
-      <p class="insta-subtitle">Follow us on social media for more discount &amp; promotions</p>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="insta-handle">@deera_official</a>
-
-      <div class="instagram-grid">
-        <div class="insta-item">
-          <img src="assets/images/instagram-1.png" alt="Lifestyle audio photography" loading="lazy">
-        </div>
-        <div class="insta-item">
-          <img src="assets/images/instagram-2.png" alt="Listening to DEERA sound outdoors" loading="lazy">
-        </div>
-        <div class="insta-item">
-          <img src="assets/images/instagram-3.png" alt="Working with music" loading="lazy">
-        </div>
-        <div class="insta-item">
-          <img src="assets/images/instagram-4.png" alt="DEERA headphone close-up" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section: Join Our Newsletter -->
-  <section class="newsletter-section" id="newsletter">
-    <div class="container">
-      <div class="newsletter-box">
-        <!-- Left Product Art -->
-        <div class="nl-media-left">
-          <img src="assets/images/newsletter-headphone.png" alt="Headphone decorative element" loading="lazy">
-        </div>
-
-        <!-- Center Form & Typography -->
-        <div class="nl-center-content">
-          <h2 class="nl-title">Join Our Newsletter</h2>
-          <p class="nl-desc">Sign up for deals, new products and promotions</p>
-          
-          <form class="newsletter-form" id="newsletterForm">
-            <div class="nl-input-wrap">
-              <svg class="nl-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              <input 
-                type="email" 
-                id="newsletterEmail" 
-                class="nl-input" 
-                placeholder="Email address" 
-                required 
-                aria-label="Email address for newsletter"
-              >
-            </div>
-            <button type="submit" class="nl-submit-btn">Signup</button>
-          </form>
-        </div>
-
-        <!-- Right Product Art -->
-        <div class="nl-media-right">
-          <img src="assets/images/newsletter-girl.png" alt="Happy girl enjoying headphones" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container">
@@ -425,14 +283,14 @@
       <div class="footer-top-row">
         <div class="footer-brand-wrap">
           <span class="footer-brand-logo">DEERA.</span>
-          <span class="footer-store-tag">Headphone Store</span>
+          <span class="footer-store-tag">Everyday Essentials Store</span>
         </div>
 
         <ul class="footer-nav">
           <li><a href="index.html">Home</a></li>
-          <li><a href="#newArrivals">Shop</a></li>
-          <li><a href="#collections">Collections</a></li>
-          <li><a href="#newsletter">Contact Us</a></li>
+          <li><a href="#newArrivals">Shop Catalog</a></li>
+          <li><a href="#benefits">Why Us</a></li>
+          <li><a href="cart.html">Cart</a></li>
         </ul>
       </div>
 
@@ -505,12 +363,13 @@
       </div>
       <ul class="mobile-nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="#newArrivals">Shop</a></li>
-        <li><a href="#collections">Collections</a></li>
-        <li><a href="#newsletter">Contact Us</a></li>
+        <li><a href="#newArrivals">Shop Catalog</a></li>
+        <li><a href="#benefits">Why Us</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="orders.html">My Orders</a></li>
       </ul>
     </div>
-    <div style="padding-top: 24px; border-top: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 10px;">
+    <div id="mobileNavAuth" style="padding-top: 24px; border-top: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 10px;">
       <a href="login.html" class="btn btn-primary w-100">Sign In</a>
       <a href="signup.html" class="btn btn-outline w-100">Create Account</a>
     </div>

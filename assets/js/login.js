@@ -92,8 +92,8 @@ if (loginForm) {
     setLoadingState(true);
 
     try {
-      // Step 2: Fetch users from DummyJSON API
-      const response = await fetch('https://dummyjson.com/users?limit=100');
+      // Step 2: Fetch users from DummyJSON API (https://dummyjson.com/users)
+      const response = await fetch('https://dummyjson.com/users?limit=0');
 
       if (!response.ok) {
         throw new Error('Server responded with status ' + response.status + '. Please check your connection.');
